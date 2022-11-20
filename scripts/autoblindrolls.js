@@ -15,7 +15,7 @@ Hooks.once("init", () => {
       game.settings.set("blind-roll-skills", "showHelpCards", false);
       ui.notifications.notify(
         "Crash's Automatic Blind Rolls (5e): " +
-          game.i18n.localize("BLINDROLLSKILLS.HelpCardsDisabled")
+        game.i18n.localize("BLINDROLLSKILLS.HelpCardsDisabled")
       );
     }
   );
@@ -41,6 +41,15 @@ Hooks.on("messageBetterRolls", (roll, chatData) => {
     chatData.rollMode = "blindroll";
     chatData.blind = true;
     createAlertMsg();
+  }
+});
+
+Hooks.on("dnd5e.rollSkill", (actor, roll, skillAbbr) => {
+  let skillsToBlind = getSkillAbbreviations();
+  let makeRollBlind = skillsToBlind.includes(skillAbbr);
+
+  if (makeRollBlind) {
+    chatData.options.rollMode = "blindroll";
   }
 });
 
