@@ -49,7 +49,7 @@ Hooks.on("dnd5e.rollSkill", (actor, roll, skillAbbr) => {
   let makeRollBlind = skillsToBlind.includes(skillAbbr);
 
   if (makeRollBlind) {
-    chatData.options.rollMode = "blindroll";
+    roll.options.rollMode = "blindroll";
   }
 });
 
